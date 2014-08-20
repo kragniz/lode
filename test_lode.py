@@ -1,3 +1,4 @@
+import glob
 import os
 
 import lode
@@ -6,7 +7,8 @@ LODEFILE = 'lodefile'
 
 
 def teardown_function(function):
-    os.remove(LODEFILE)
+    for lodefile in glob.glob('*lodefile'):
+        os.remove(lodefile)
 
 
 def test_log_function_exists():
@@ -45,3 +47,10 @@ def test_five_things_are_logged():
                 things_found = True
 
     assert(things_found)
+
+
+def test_setting_filename():
+    name = 'different_lodefile'
+    lode.log('hi there', name=name)
+    with open(name) as f:
+        assert('hi there' in f.read())
