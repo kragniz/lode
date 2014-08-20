@@ -54,3 +54,11 @@ def test_setting_filename():
     lode.log('hi there', name=name)
     with open(name) as f:
         assert('hi there' in f.read())
+
+
+def test_find_caller_function():
+    def dummy_function():
+        return lode._get_caller_function()
+
+    caller_function = dummy_function()
+    assert(caller_function == 'test_find_caller_function')
