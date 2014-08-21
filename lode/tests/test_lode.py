@@ -91,3 +91,17 @@ def test_caller_trace():
         for line in f:
             assert('f3 -> f2 -> f1' in line)
 
+
+class Nest(object):
+    def nested(self):
+        lode.log('deep function', qualify=True)
+
+
+def test_qualified_function_name():
+    n = Nest()
+    n.nested()
+
+    with open(LODEFILE) as f:
+        for line in f:
+            print line
+            assert('.Nest.nested' in line)
