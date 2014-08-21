@@ -73,3 +73,21 @@ def test_function_name_logged():
             if 'test_function_name_logged' in line:
                 function_found = True
     assert(function_found)
+
+
+def test_caller_trace():
+    def f1():
+        lode.log('caller depth=3', depth=3)
+
+    def f2():
+        f1()
+
+    def f3():
+        f2()
+
+    f3()
+
+    with open(LODEFILE) as f:
+        for line in f:
+            assert('f3 -> f2 -> f1' in line)
+
