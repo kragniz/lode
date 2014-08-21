@@ -103,5 +103,4 @@ def test_qualified_function_name():
 
     with open(LODEFILE) as f:
         for line in f:
-            print line
             assert('.Nest.nested' in line)
