@@ -62,3 +62,14 @@ def test_find_caller_function():
 
     caller_function = dummy_function()
     assert(caller_function == 'test_find_caller_function')
+
+
+def test_function_name_logged():
+    lode.log('logging function name')
+
+    with open(LODEFILE) as f:
+        function_found = False
+        for line in f:
+            if 'test_function_name_logged' in line:
+                function_found = True
+    assert(function_found)
