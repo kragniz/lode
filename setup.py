@@ -5,7 +5,7 @@ except ImportError:
 
 setup(
     name='lode',
-    version='0.1.0',
+    version='0.1.1',
     author='Louis Taylor',
     author_email='kragniz@gmail.com',
     description=('Tiny and minimalistic logging utility'),
