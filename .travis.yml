@@ -5,6 +5,8 @@ python:
     - "3.2"
     - "3.3"
 
+before_script:
+    - pip install -e .
+
 script: 
-    - "pip install -e ."
-    - "py.test -v"
+    - py.test -v
