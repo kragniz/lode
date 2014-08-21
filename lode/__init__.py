@@ -11,7 +11,7 @@ def _format_items(items):
 
 
 def _format_function(function_name):
-    return '{}():'.format(function_name)
+    return '{name}():'.format(name=function_name)
 
 
 def log(*items, **kwargs):
