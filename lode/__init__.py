@@ -10,14 +10,14 @@ def _get_caller_function():
 def _get_caller_trace(depth=1):
     sep = ' -> '
     return sep.join([frame[3] for frame in
-        reversed(inspect.stack()[3:depth+2])]) + sep[:-1]
+                    reversed(inspect.stack()[3:depth+2])]) + sep[:-1]
 
 
 def _get_caller_name(depth=2):
     stack = inspect.stack()
     start = 0 + depth
     if len(stack) < start + 1:
-      return ''
+        return ''
 
     parentframe = stack[start][0]
 
@@ -63,6 +63,6 @@ def log(*items, **kwargs):
 
     line = _format_items(prepend + list(items))
 
-    with open(name, 'a') as f: 
+    with open(name, 'a') as f:
         f.write(line)
         f.write('\n')
