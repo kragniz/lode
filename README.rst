@@ -17,6 +17,8 @@ is executed, but stdout or stderr has been robbed from you by something like a
 devilishly clever test framework.  Rather than try to uncover which dark
 alleyway your calls to print end up, lode just outputs it to a friendly file.
 
+Lode is tested and supported on python versions 2.6, 2.7, 3.2, 3.3 and 3.4.
+
 Installing
 ==========
 
