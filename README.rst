@@ -1,6 +1,7 @@
 ====
 lode
 ====
+
 .. image:: https://pypip.in/v/lode/badge.png
     :target: https://pypi.python.org/pypi/lode
     :alt: Latest PyPI version
@@ -9,3 +10,8 @@ lode
     :target: https://travis-ci.org/kragniz/lode
 
 Tiny and minimalistic logging utility module.
+
+Installing
+==========
+
+``$ pip install lode``
