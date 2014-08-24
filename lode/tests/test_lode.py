@@ -1,5 +1,6 @@
 import glob
 import os
+import re
 
 import lode
 
@@ -104,3 +105,28 @@ def test_qualified_function_name():
     with open(LODEFILE) as f:
         for line in f:
             assert('.Nest.nested' in line)
+
+
+def test_traceback():
+    def c():
+        lode.log('this has a traceback attached', traceback=5)
+
+    def b():
+        c()
+
+    def a():
+        b()
+
+    a()
+
+    traceback_pattern = '''File ".+?", line \d+?, in test_traceback
+\s+a\(\)
+\s+File ".+?", line \d+?, in a
+\s+b\(\)
+\s+File ".+?", line \d+?, in b
+\s+c\(\)
+\s+File ".+?", line \d+?, in c
+\s+lode.log\('this has a traceback attached', traceback'''
+
+    with open(LODEFILE) as f:
+        assert(re.search(traceback_pattern, f.read()) is not None)

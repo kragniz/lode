@@ -1,6 +1,7 @@
-import gc
 import inspect
 import os
+import sys
+import traceback
 
 
 def _get_caller_function():
@@ -15,11 +16,10 @@ def _get_caller_trace(depth=1):
 
 def _get_caller_name(depth=2):
     stack = inspect.stack()
-    start = 0 + depth
-    if len(stack) < start + 1:
+    if len(stack) < depth + 1:
         return ''
 
-    parentframe = stack[start][0]
+    parentframe = stack[depth][0]
 
     name = []
     module = inspect.getmodule(parentframe)
@@ -37,9 +37,22 @@ def _get_caller_name(depth=2):
 
     return ".".join(name)
 
+def _get_stack(depth=None):
+    try:
+        raise ZeroDivisionError
+    except ZeroDivisionError:
+        f = sys.exc_info()[2].tb_frame.f_back
+
+    trace = traceback.format_list(traceback.extract_stack(f, depth))
+
+    if depth is None:
+        depth = len(trace)
+
+    return '\n' + ''.join(trace[len(trace) - depth:-1])
+
 
 def _format_items(items):
-    return ' '.join([str(item) for item in items])
+    return ' '.join([str(item) for item in items if item != ''])
 
 
 def _format_function(function_name):
@@ -50,6 +63,15 @@ def log(*items, **kwargs):
     name = kwargs.get('name', 'lodefile')
     depth = kwargs.get('depth', 1)
     qualify = kwargs.get('qualify', False)
+    traceback_depth = kwargs.get('traceback', None)
+
+    traceback_str = ''
+
+    if traceback_depth is not None:
+        if traceback_depth == True:
+            traceback_str = _get_stack()
+        elif traceback_depth > 0:
+            traceback_str = _get_stack(traceback_depth)
 
     prepend = []
 
@@ -64,5 +86,6 @@ def log(*items, **kwargs):
     line = _format_items(prepend + list(items))
 
     with open(name, 'a') as f:
+        f.write(traceback_str)
         f.write(line)
         f.write('\n')
