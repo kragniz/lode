@@ -3,13 +3,16 @@ try:
 except ImportError:
     from distutils.core import setup
 
+with open("README.rst") as readme:
+    long_description = readme.read()
+
 setup(
     name='lode',
     version='0.2.0',
     author='Louis Taylor',
     author_email='kragniz@gmail.com',
     description=('Tiny and minimalistic logging utility'),
-    long_description=open("README.rst").read(),
+    long_description=long_description,
     license='GPL',
     keywords='logging debugging',
     url='https://github.com/kragniz/lode',
