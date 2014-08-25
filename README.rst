@@ -19,12 +19,25 @@ alleyway your calls to print end up, lode just outputs it to a friendly file.
 
 Lode is tested and supported on python versions 2.6, 2.7, 3.2, 3.3 and 3.4.
 
+
 Installing
 ==========
+
+Lode can be installed with pip:
 
 .. code:: bash
 
     $ pip install lode
+
+
+Or from source:
+
+.. code:: bash
+
+    $ git clone https://github.com/kragniz/lode.git
+    $ cd lode
+    $ python setup.py install
+
 
 Using this thing
 ================
