@@ -42,6 +42,11 @@ Or from source:
 Using this thing
 ================
 
+For the most basic usage, just import lode and call the `log` function. Usage
+is largely the same as the print function, with it taking any number of
+positional arguments, formatting those to a string, and joining them together
+separated by spaces.
+
 .. code:: python
 
     import lode; lode.log('hi there!')
