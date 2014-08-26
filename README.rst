@@ -45,3 +45,22 @@ Using this thing
 .. code:: python
 
     import lode; lode.log('hi there!')
+
+
+Tests
+=====
+
+Tests are stored the `tests` subdirectory of the main lode package. Set up lode
+for testing by running in the root directory of the git repository the
+following commands:
+
+.. code:: bash
+
+    $ pip install -e .
+    $ pip install -r test-requirements.txt
+
+Then run the tests:
+
+.. code:: bash
+
+    $ py.test -v
