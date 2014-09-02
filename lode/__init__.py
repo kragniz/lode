@@ -51,8 +51,8 @@ def _get_stack(depth=None):
     return '\n' + ''.join(trace[len(trace) - depth:-1])
 
 
-def _format_items(items):
-    return ' '.join([str(item) for item in items if item != ''])
+def _format_items(items, sep):
+    return sep.join([str(item) for item in items if item != ''])
 
 
 def _format_function(function_name):
@@ -64,6 +64,7 @@ def log(*items, **kwargs):
     depth = kwargs.get('depth', 1)
     qualify = kwargs.get('qualify', False)
     traceback_depth = kwargs.get('traceback', None)
+    sep = kwargs.get('sep', ' ')
 
     traceback_str = ''
 
@@ -83,7 +84,7 @@ def log(*items, **kwargs):
 
     prepend.append(_format_function(_get_caller_function()))
 
-    line = _format_items(prepend + list(items))
+    line = _format_items(prepend + list(items), sep)
 
     with open(name, 'a') as f:
         f.write(traceback_str)

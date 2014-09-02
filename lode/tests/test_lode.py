@@ -50,6 +50,17 @@ def test_five_things_are_logged():
     assert(things_found)
 
 
+def test_things_are_logged_with_sep():
+    things = ('one', 'two', 'three', 'four')
+    sep = ':'
+    things_str = sep.join(things)
+
+    lode.log(*things, sep=sep)
+
+    with open(LODEFILE) as f:
+        assert(things_str in f.read())
+
+
 def test_setting_filename():
     name = 'different_lodefile'
     lode.log('hi there', name=name)
