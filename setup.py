@@ -8,7 +8,7 @@ with open("README.rst") as readme:
 
 setup(
     name='lode',
-    version='0.2.0',
+    version='0.3.0',
     author='Louis Taylor',
     author_email='kragniz@gmail.com',
     description=('Tiny and minimalistic logging utility'),
