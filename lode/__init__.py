@@ -59,8 +59,15 @@ def _format_function(function_name):
     return '{name}():'.format(name=function_name)
 
 
+def _write(f, traceback, line):
+    f.write(traceback)
+    f.write(line)
+    f.write('\n')
+
+
 def log(*items, **kwargs):
     name = kwargs.get('name', 'lodefile')
+    file = kwargs.get('file', None)
     depth = kwargs.get('depth', 1)
     qualify = kwargs.get('qualify', False)
     traceback_depth = kwargs.get('traceback', None)
@@ -86,7 +93,7 @@ def log(*items, **kwargs):
 
     line = _format_items(prepend + list(items), sep)
 
-    with open(name, 'a') as f:
-        f.write(traceback_str)
-        f.write(line)
-        f.write('\n')
+    if file is None:
+        file = open(name, 'a')
+
+    _write(file, traceback_str, line)

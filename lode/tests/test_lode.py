@@ -8,7 +8,7 @@ LODEFILE = 'lodefile'
 
 
 def teardown_function(function):
-    for lodefile in glob.glob('*lodefile'):
+    for lodefile in glob.glob('*lodefile') + glob.glob('/tmp/*lodefile'):
         os.remove(lodefile)
 
 
@@ -27,6 +27,21 @@ def test_thing_is_logged():
     lode.log(thing)
 
     with open(LODEFILE) as f:
+        thing_found = False
+        for line in f:
+            if thing in line:
+                thing_found = True
+
+    assert(thing_found)
+
+
+def test_thing_is_logged_to_different_file():
+    thing = 'thing with some different words'
+    filename = '/tmp/new_lodefile'
+    with open(filename, 'a') as f:
+        lode.log(thing, file=f)
+
+    with open(filename) as f:
         thing_found = False
         for line in f:
             if thing in line:
