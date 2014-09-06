@@ -97,3 +97,4 @@ def log(*items, **kwargs):
         file = open(name, 'a')
 
     _write(file, traceback_str, line)
+    file.close()
